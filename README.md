@@ -11,6 +11,8 @@ This is backend node js starter template.
     
 ## Step 3
     npm run start
+    
+---
 
 ### Code Architecture 
 ```
@@ -43,10 +45,11 @@ PROJECT-NAME
 ### Used JavaScript Version
     ES6
 
+---
 ### Definitions
 > **controllers** `Refactor callback functions, define app routes and business logic`
 
-> **models** `Represent data structure, validation`
+> **models** `Represent data structure, schema, validation`
 
 > **helpers** `code and functionality to be shared by different parts of the project, e.g, global constant`
 
@@ -55,3 +58,22 @@ PROJECT-NAME
 > **services** `Auth services like passport strategies and authorisation, database access services and other third-party external api, rendering templates`
 
 > **config** `Permissions, loggers, etc`
+
+---
+### Branches capability
+
+#### master
+> Just running app, no api calls.
+
+ `Localhost server running on port 4000`
+
+#### local-db
+> CRUD api calls using local data including controllers and routes usage.
+
+  ```
+  GET:      localhost:4000/api/v1/tasks
+  GET:      localhost:4000/api/v1/tasks/1
+  POST:     localhost:4000/api/v1/tasks (body - { title, description } )
+  PUT:      localhost:4000/api/v1/tasks/1 (body - { title, description } )
+  DELETE:   localhost:4000/api/v1/tasks/1
+  ```
