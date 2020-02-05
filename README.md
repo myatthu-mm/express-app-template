@@ -4,8 +4,12 @@ This is backend node js starter template.
 
 ## Step 1
     npm install
+        
+## Step 2 (Create .env)
+    HOST=Localhost
+    PORT=4000(or something) in .env
     
-## Step 2
+## Step 3
     npm run start
 
 ### Code Architecture 
@@ -35,7 +39,9 @@ PROJECT-NAME
 ```
 
 > #### Need to see all branches for full code architecture
-> #### Used JavaScript ES6
+
+### Used JavaScript Version
+    ES6
 
 ### Definitions
 > **controllers** `Refactor callback functions, define app routes and business logic`
