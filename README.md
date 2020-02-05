@@ -13,16 +13,16 @@ This is backend node js starter template.
 PROJECT-NAME
 ├── config
 │   ├── permission.js
-├── controllers (Refactor callbacks)
+├── controllers
 │   ├── controller-1
-│   ├──       |
+│   ├──       ။
 │   ├── controller-N
 ├── helpers
 │   ├── constants.js
 ├── routes
 │   ├── api.js (Bundle routes)
 │   ├── route-1
-│   ├──    |
+│   ├──    ။
 │   ├── route-N
 ├── services
 │   ├── auth.js
@@ -34,4 +34,18 @@ PROJECT-NAME
 ├── .env
 ```
 
-> Need to see all branches for full code architecture
+> #### Need to see all branches for full code architecture
+> #### Used JavaScript ES6
+
+### Definitions
+> **controllers** `Refactor callback functions, define app routes and business logic`
+
+> **models** `Represent data structure, validation`
+
+> **helpers** `code and functionality to be shared by different parts of the project, e.g, global constant`
+
+> **routes** `Define API endpoints for corresponding controller methods and serve like middlewares that access to request & response object`
+
+> **services** `Auth services like passport strategies and authorisation, database access services and other third-party external api, rendering templates`
+
+> **config** `Permissions, loggers, etc`
