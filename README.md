@@ -54,17 +54,13 @@ PROJECT-NAME
 
 ### Definitions
 
-> **controllers** `Refactor callback functions, define app routes and business logic`
-
-> **models** `Represent data structure, schema, validation`
-
-> **helpers** `code and functionality to be shared by different parts of the project, e.g, global constant`
-
-> **routes** `Define API endpoints for corresponding controller methods and serve like middlewares that access to request & response object`
-
-> **services** `Auth services like passport strategies and authorisation, database access services and other third-party external api, rendering templates`
-
-> **config** `Permissions, loggers, etc`
+- [ ] **controllers** `Refactor callback functions, define app routes and business logic`
+- [ ] **controllers** `Refactor callback functions, define app routes and business logic`
+- [ ] **models** `Represent data structure, schema, validation`
+- [ ] **helpers** `code and functionality to be shared by different parts of the project, e.g, global constant`
+- [ ] **routes** `Define API endpoints for corresponding controller methods and serve like middlewares that access to request & response object`
+- [ ] **services** `Auth services like passport strategies and authorisation, database access services and other third-party external api, rendering templates`
+- [ ] **config** `Permissions, loggers, etc`
 
 ---
 
