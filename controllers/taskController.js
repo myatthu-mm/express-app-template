@@ -1,35 +1,39 @@
-import tasks from '../localdb/db';
+// import Task model
+import Task from '../models/taskModel';
+import mongoose from 'mongoose';
 
 class TasksController {
   getAllTasks(req, res) {
-    const paramTitle = req.query.title;
-    let filterTasks = tasks;
-    if (paramTitle) {
-      filterTasks = tasks.filter(task => task.title.includes(paramTitle))
-    }
-    return res.status(200).send({
-      success: 'true',
-      message: 'tasks retrieved successfully',
-      tasks: filterTasks
-    });
+    Task.find((err, tasks) => {
+      if (err) {
+        res.json({
+          status: 'error',
+          message: err
+        })
+      }
+      return res.status(200).send({
+        success: 'true',
+        message: 'tasks retrieved successfully',
+        tasks: tasks
+      });
+    })
   }
 
   getTaskByID(req, res) {
-    const id = parseInt(req.params.id, 10);
-    tasks.map(task => {
-      if (task.id === id) {
-        return res.status(200).send({
-          success: 'true',
-          message: 'task retrieved successfully',
-          task
-        });
-      }
-    });
 
-    return res.status(404).send({
-      success: 'false',
-      message: 'task does not exist'
-    });
+    Task.findById(req.params.id).then((task) => {
+      return res.status(200).send({
+        success: 'true',
+        message: 'task retrieved successfully',
+        task
+      });
+    }).catch(err => {
+      return res.status(404).send({
+        success: 'false',
+        message: 'task does not exist',
+        detail: err
+      });
+    })
   }
 
   createTask(req, res) {
@@ -44,37 +48,23 @@ class TasksController {
         message: 'description is required'
       });
     }
-    const task = {
-      id: tasks.length + 1,
-      title: req.body.title,
-      description: req.body.description
-    };
-    tasks.push(task);
-    return res.status(201).send({
-      success: 'true',
-      message: 'task added successfully',
-      task
-    });
+    let task = new Task()
+    task.title = req.body.title
+    task.description = req.body.description
+    // save to db
+    task.save(err => {
+      if (err)
+        res.json(err)
+
+      return res.status(201).send({
+        success: 'true',
+        message: 'task added successfully',
+        task
+      });
+    })
   }
 
   updateTask(req, res) {
-    const id = parseInt(req.params.id, 10);
-    let taskFound;
-    let itemIndex;
-    tasks.map((task, index) => {
-      if (task.id === id) {
-        taskFound = task;
-        itemIndex = index;
-      }
-    });
-
-    if (!taskFound) {
-      return res.status(404).send({
-        success: 'false',
-        message: 'task not found'
-      });
-    }
-
     if (!req.body.title) {
       return res.status(400).send({
         success: 'false',
@@ -87,44 +77,33 @@ class TasksController {
       });
     }
 
-    const newTask = {
-      id: taskFound.id,
-      title: req.body.title || taskFound.title,
-      description: req.body.description || taskFound.description
-    };
-
-    tasks.splice(itemIndex, 1, newTask);
-
-    return res.status(201).send({
-      success: 'true',
-      message: 'task added successfully',
-      newTask
-    });
+    Task.findByIdAndUpdate(req.params.id, { $set: { title: req.body.title, description: req.body.description } }, { new: true })
+      .then((result) => {
+        if (result) {
+          return res.status(201).send({
+            success: 'true',
+            message: 'task updated successfully',
+            result
+          });
+        } else {
+          reject({ success: false, data: "no such user exist" });
+        }
+      }).catch((err) => {
+        reject(err)
+      })
   }
 
   deleteTask(req, res) {
-    const id = parseInt(req.params.id, 10);
-    let taskFound;
-    let itemIndex;
-    tasks.map((task, index) => {
-      if (task.id === id) {
-        taskFound = task;
-        itemIndex = index;
-      }
-    });
-
-    if (!taskFound) {
-      return res.status(404).send({
-        success: 'false',
-        message: 'task not found'
+    Task.deleteOne({
+      _id: req.params.id
+    }, (err, task) => {
+      if (err)
+        res.json(err)
+      return res.status(200).send({
+        success: 'true',
+        message: 'Task deleted successfuly'
       });
-    }
-    tasks.splice(itemIndex, 1);
-
-    return res.status(200).send({
-      success: 'true',
-      message: 'Task deleted successfuly'
-    });
+    })
   }
 }
 

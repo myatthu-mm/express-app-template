@@ -1,0 +1,1 @@
+export const TASK_ENDPOINT_ROUTE = 'tasks'
