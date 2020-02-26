@@ -1,6 +1,5 @@
 // import Task model
 import Task from '../models/taskModel';
-import mongoose from 'mongoose';
 
 class TasksController {
   getAllTasks(req, res) {
