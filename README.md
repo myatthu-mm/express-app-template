@@ -80,6 +80,10 @@ PROJECT-NAME
 
 > CRUD api calls using mongo database including controllers and routes usage.
 
+#### jwt-auth
+
+> Protected route using JWT auth
+
 ```
 GET:      localhost:4000/api/v1/tasks
 GET:      localhost:4000/api/v1/tasks/1
